@@ -1,10 +1,15 @@
 import { Module } from "@nestjs/common";
-
-import { ProductsModule } from "./products/products.module";
+import { ConfigModule } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ProductsModule } from "./modules/products/products.module";
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { MongooseModule } from "@nestjs/mongoose";
 
 @Module({
-  imports: [ProductsModule],
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWD}@cluster0.91k9g.mongodb.net/productsDb`),
+  ProductsModule, AuthModule, UsersModule,],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
