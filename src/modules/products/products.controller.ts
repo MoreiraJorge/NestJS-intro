@@ -17,7 +17,7 @@ import { ProductsService } from "./products.service";
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Roles(Role.Guest)
+  @Roles(Role.Guest, Role.Admin)
   @Post()
   async addProduct(
     @Body() createProductDto: CreateProductDto
