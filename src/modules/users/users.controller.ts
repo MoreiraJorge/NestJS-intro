@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { RegisterUserDto } from "src/dto/registerUser.dto";
+import { Public } from "../auth/constants";
 import { UsersService } from "./users.service";
 
 @Controller("users")
@@ -13,6 +14,7 @@ export class UsersController {
         return await this.userService.findOne(mail);
     }
 
+    @Public()
     @Post('register')
     async register(
         @Body() registerUserDto: RegisterUserDto

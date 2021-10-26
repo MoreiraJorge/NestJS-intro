@@ -15,11 +15,7 @@ export class AuthService {
             return null;
         }
 
-        console.log(user);
-        console.log(password)
-        console.log(user.password)
-
-        if(bcrypt.compare(password, user.password)){
+        if(await bcrypt.compare(password, user.password)){
             return user
         }
         return null;

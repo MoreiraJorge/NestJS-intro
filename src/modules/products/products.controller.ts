@@ -5,12 +5,10 @@ import {
   Get,
   Param,
   Patch,
-  Post,
-  UseGuards,
+  Post
 } from "@nestjs/common";
 import {CreateProductDto} from "src/dto/createProduct.dto";
 import { Product } from "src/schemas/product.schema";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ProductsService } from "./products.service";
 
 @Controller("products")
@@ -29,7 +27,6 @@ export class ProductsController {
     return await this.productsService.getProducts();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(":id")
   async getProduct(@Param("id") prodId: string) {
     return await this.productsService.getSingleProduct(prodId);
