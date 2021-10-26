@@ -8,13 +8,16 @@ import {
   Post
 } from "@nestjs/common";
 import {CreateProductDto} from "src/dto/createProduct.dto";
+import { Role } from "src/schemas/enums/role.enum";
 import { Product } from "src/schemas/product.schema";
+import { Roles } from "../auth/auth.decorator";
 import { ProductsService } from "./products.service";
 
 @Controller("products")
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @Roles(Role.Guest)
   @Post()
   async addProduct(
     @Body() createProductDto: CreateProductDto
