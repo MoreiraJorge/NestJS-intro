@@ -11,7 +11,9 @@ import { RolesGuard } from "./modules/auth/guards/roles.guard";
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     MongooseModule.forRoot(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWD}@cluster0.91k9g.mongodb.net/productsDb`),
     ProductsModule,
     AuthModule,

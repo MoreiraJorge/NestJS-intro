@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Patch,
-  Post
+  Post,
+  Req
 } from "@nestjs/common";
 import {CreateProductDto} from "src/dto/createProduct.dto";
 import { Role } from "src/schemas/enums/role.enum";
@@ -20,8 +21,10 @@ export class ProductsController {
   @Roles(Role.Guest, Role.Admin)
   @Post()
   async addProduct(
-    @Body() createProductDto: CreateProductDto
+    @Req() req,
+    @Body() createProductDto: CreateProductDto,
   ): Promise<Product> {
+    console.log("User : " + JSON.stringify(req.user))
     return await this.productsService.insertProduct(createProductDto);
   }
 
